@@ -1,0 +1,162 @@
+<html>
+<head>
+    <style>
+        body {
+            background-image: url("https://img.freepik.com/free-photo/abstract-digital-grid-black-background_53876-97647.jpg?size=626&ext=jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        table {
+            color: white;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        th, td {
+            border: 1px solid white;
+            padding: 12px;
+        }
+        
+        th {
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: left;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .delete-button:hover {
+            background-color: #b30000;
+        }
+        
+        .input-container {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .input-container input[type="text"] {
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            width: 120px;
+        }
+        
+        .input-container button {
+            padding: 8px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function addRow() {
+            var table = document.getElementById("myTable");
+            var newRow = table.insertRow(table.rows.length);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+            
+            var firstname = document.getElementById("firstname").value;
+            var lastname = document.getElementById("lastname").value;
+            var age = document.getElementById("age").value;
+            var usn = document.getElementById("usn").value;
+            
+            cell1.innerHTML = firstname;
+            cell2.innerHTML = lastname;
+            cell3.innerHTML = age;
+            cell4.innerHTML = usn;
+            cell5.innerHTML = '<button class="delete-button" onclick="deleteRow(this)">Delete</button>';
+            
+            // Apply different background color to the new row
+            newRow.style.backgroundColor = table.rows.length % 2 === 0 ? "rgba(0, 0, 0, 0.5)" : "rgba(255, 255, 255, 0.5)";
+            
+            // Clear input fields
+            document.getElementById("firstname").value = "";
+            document.getElementById("lastname").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("usn").value = "";
+        }
+        
+        function deleteRow(row) {
+            var table = document.getElementById("myTable");
+            var rowIndex = row.parentNode.parentNode.rowIndex;
+            table.deleteRow(rowIndex);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <table id="myTable">
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+                <th>USN</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>Sultan</td>
+                <td>Nadaf</td>
+                <td>20</td>
+                <td>4AL21CS162</td>
+                <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>Srinivas</td>
+                <td>Soppin</td>
+                <td>20</td>
+                <td>4AL21CS155</td>
+                <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+        </table>
+        
+        <div class="input-container">
+            <input type="text" id="firstname" placeholder="Firstname">
+            <input type="text" id="lastname" placeholder="Lastname">
+            <input type="text" id="age" placeholder="Age">
+            <input type="text" id="usn" placeholder="USN">
+            <button onclick="addRow()">Add Row</button>
+        </div>
+    </div>
+</body>
+</html>
